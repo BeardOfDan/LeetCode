@@ -51,8 +51,6 @@ const l2 = makeList(b);
  * @return {ListNode}
  */
 var addTwoNumbers = function (l1, l2) {
-  // const digits1 = [];
-  // const digits2 = [];
   let p1 = l1;
   let p2 = l2;
 
@@ -90,31 +88,6 @@ var addTwoNumbers = function (l1, l2) {
   if (carry) { // edge case
     p3.next = Node(1);
   }
-
-  // const fillDigits = (digits, pointer) => {
-  //   while(true) {
-  //     digits.push(pointer.val);
-  //     if (pointer.next === null) {
-  //       return;
-  //     }
-  //     pointer = pointer.next;
-  //   }
-  // }
-
-  // fillDigits(digits1, p1);
-  // fillDigits(digits2, p2);
-
-  // const num1 = parseInt(digits1.reverse().join(''));
-  // const num2 = parseInt(digits2.reverse().join(''));
-  // const num3 = num1 + num2;
-  // const digits3 = num3.toString().split('');
-
-  // const l3 = Node(parseInt(digits3.pop()));
-  // let p3 = l3;
-  // while(digits3.length > 0) {
-  //   p3.next = Node(parseInt(digits3.pop()));
-  //   p3 = p3.next;
-  // }
 
   return l3;
 };
