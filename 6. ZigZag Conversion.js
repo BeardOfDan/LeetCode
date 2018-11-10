@@ -4,48 +4,24 @@
  * @return {string}
  */
 var convert = function (s, numRows) {
-  if (numRows < 2) {
+  if (numRows === 1) {
     return s;
   }
 
-  const rows = [];
+  let result = '';
+  const size = s.length;
+  const cycleLength = 2 * numRows - 2;
+
   for (let i = 0; i < numRows; i++) {
-    rows[i] = [];
-  }
-
-  let index = 0;
-  const limit = Math.ceil(s.length / numRows);
-  for (let z = 0; z < limit; z++) {
-    // while (index < s.length) {
-    // vertical lines
-    for (let i = 0; i < numRows; i++) {
-      const rowNum = i;
-      //       const rowNum = ((numRows - 1) * z + i);
-      //       const colNum = (numRows * z) - z;
-      const colNum = (numRows - 1) * z;
-      rows[rowNum][colNum] = s[index];
-      index++;
-    }
-    // diagonal lines
-    for (let i = 0; i < (numRows - 2); i++) {
-      const rowNum = numRows - 2 - i;
-      const colNum = ((numRows - 1) * z) + i + 1;
-      rows[rowNum][colNum] = s[index];
-      index++;
-    }
-
-    if (true) {
-      const unusedVar = 'need a breakpoint here';
+    for (let j = 0; (i + j) < size; j += cycleLength) {
+      result += s[i + j];
+      if ((i !== 0) && (i !== (numRows - 1)) && ((cycleLength - i + j) < size)) {
+        result += s[cycleLength - i + j];
+      }
     }
   }
 
-  let result = [];
-  for (let i = 0; i < numRows; i++) {
-    result = result.concat(rows[i]);
-  }
-
-  return result.join('');
-  // return rows.flat().join(''); // experimental feature "flat()" is not yet supported
+  return result;
 };
 
 // console.log(convert("PAYPALISHIRING", 3)); // expecting 'PAHNAPLSIIGYIR'
