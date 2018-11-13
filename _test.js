@@ -10,8 +10,12 @@ module.exports = {
       const args = inputs[i][0];
       const expected = inputs[i][1];
       const actual = f(...args);
+      let comparison = actual === expected;
+      if (Array.isArray(expected) || (typeof expected === 'object')) {
+        comparison = JSON.stringify(actual) === JSON.stringify(expected);
+      }
 
-      console.assert(actual === expected, `case: ${JSON.stringify(...args)}, ${JSON.stringify(expected)} | Expected ${JSON.stringify(expected)}, but recieved: ${JSON.stringify(actual)}`);
+      console.assert(comparison, `case: ${JSON.stringify(...args)}, ${JSON.stringify(expected)} | Expected ${JSON.stringify(expected)}, but recieved: ${JSON.stringify(actual)}`);
     }
 
     if (useSpacing) {
@@ -25,8 +29,12 @@ module.exports = {
       const arg = inputs[i][0];
       const expected = inputs[i][1];
       const actual = f(arg);
+      let comparison = actual === expected;
+      if (Array.isArray(expected) || (typeof expected === 'object')) {
+        comparison = JSON.stringify(actual) === JSON.stringify(expected);
+      }
 
-      console.assert(actual === expected, `case: ${JSON.stringify(arg)}, ${JSON.stringify(expected)} | Expected ${JSON.stringify(expected)}, but recieved: ${JSON.stringify(actual)}`);
+      console.assert(comparison, `case: ${JSON.stringify(arg)}, ${JSON.stringify(expected)} | Expected ${JSON.stringify(expected)}, but recieved: ${JSON.stringify(actual)}`);
     }
 
     if (useSpacing) {
