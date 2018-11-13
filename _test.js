@@ -15,7 +15,7 @@ module.exports = {
         comparison = JSON.stringify(actual) === JSON.stringify(expected);
       }
 
-      console.assert(comparison, `case: ${JSON.stringify(...args)}, ${JSON.stringify(expected)} | Expected ${JSON.stringify(expected)}, but recieved: ${JSON.stringify(actual)}`);
+      console.assert(comparison, `case: ${JSON.stringify(...args)}, ${JSON.stringify(expected)} \n  Expected: \n${JSON.stringify(expected)}\n  Recieved: \n${JSON.stringify(actual)}`);
     }
 
     if (useSpacing) {
@@ -34,7 +34,7 @@ module.exports = {
         comparison = JSON.stringify(actual) === JSON.stringify(expected);
       }
 
-      console.assert(comparison, `case: ${JSON.stringify(arg)}, ${JSON.stringify(expected)} | Expected ${JSON.stringify(expected)}, but recieved: ${JSON.stringify(actual)}`);
+      console.assert(comparison, `case: ${JSON.stringify(...args)}, ${JSON.stringify(expected)} \n  Expected: \n${JSON.stringify(expected)}\n  Recieved: \n${JSON.stringify(actual)}`);
     }
 
     if (useSpacing) {
