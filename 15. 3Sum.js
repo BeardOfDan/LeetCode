@@ -6,7 +6,7 @@ var threeSum = function (numbers) {
   const result = [];
   const nums = numbers.sort((a, b) => { return a - b; }); // doesn't mutate the input array
 
-  for (let i = 0; i < nums.length; i++) {
+  for (let i = 0; i < (nums.length - 2); i++) {
     if ((i !== 0) && (nums[i] === nums[i - 1])) { // don't allow duplicate triplicates
       continue;
     }
