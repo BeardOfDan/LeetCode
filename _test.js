@@ -19,5 +19,20 @@ module.exports = {
     }
 
     return true; // signifies that all assertions were run
+  },
+  runTestsSingleArg: (f, inputs, useSpacing = true, spacing = '\n') => {
+    for (let i = 0; i < inputs.length; i++) {
+      const arg = inputs[i][0];
+      const expected = inputs[i][1];
+      const actual = f(arg);
+
+      console.assert(actual === expected, `case: ${JSON.stringify(arg)}, ${JSON.stringify(expected)} | Expected ${JSON.stringify(expected)}, but recieved: ${JSON.stringify(actual)}`);
+    }
+
+    if (useSpacing) {
+      console.log(spacing);
+    }
+
+    return true; // signifies that all assertions were run
   }
 };
