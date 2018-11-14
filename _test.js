@@ -1,7 +1,11 @@
 
+const Node = (val) => {
+  return { val, next: null };
+};
+
 // f is the function to test
 // input is an array of tuples
-//   Ex. input = [[args, expected]]
+//   Ex. input = [[args1, expected1], [args2, expected2]]
 //   Where args are the arguments for function f
 //    and expected is the expected return result of f
 module.exports = {
@@ -28,7 +32,7 @@ module.exports = {
         hasHadFailed = true;
       }
 
-      console.assert(comparison, `case #${i}: ${JSON.stringify(args.map((arg) => { return JSON.stringify(arg); }), '', 2)}, ${stringExpected} \n  Expected: \n${stringExpected}\n  Recieved: \n${stringActual}`);
+      console.assert(comparison, `case #${i}: ${JSON.stringify(args.map((arg) => { return JSON.stringify(arg, '', 2); }))}, ${stringExpected} \n  Expected: \n${stringExpected}\n  Recieved: \n${stringActual}`);
     }
 
     if (useSpacing) {
@@ -68,5 +72,29 @@ module.exports = {
     }
 
     return true; // signifies that all assertions were run
+  },
+
+  makeLinkedList: (values) => {
+    const list = Node(values[0]);
+    let pointer = list;
+
+    for (let i = 1; i < values.length; i++) {
+      pointer.next = Node(values[i]);
+      pointer = pointer.next;
+    }
+
+    return list;
+  },
+
+  listToArr: (head) => {
+    const result = [];
+    let pointer = head;
+
+    while (pointer !== null) {
+      result.push(pointer.val);
+      pointer = pointer.next;
+    }
+
+    return result;
   }
 };
