@@ -3,29 +3,17 @@
  * @param {number} val
  * @return {number}
  */
-var removeElement = function(nums, val) {
+var removeElement = function (nums, val) {
+  let current = 0;
 
-  let len = nums.length;
-
-  for (let i = 0; i < nums.length; i++) {
-    if (nums[i] === val) {
-        len--;
-        shiftArr(nums, i);
-
-        if (nums[i] === val) { // if it's the same value, then repeate this step
-          i--;
-        }
+  for (let lead = 0; lead < nums.length; lead++) {
+    if (nums[lead] !== val) {
+      nums[current] = nums[lead];
+      current++;
     }
   }
 
-  return len;
+  return current;
 };
 
-// A helper function
-const shiftArr = (arr, index) => {
-  for (let i = index; i < arr.length - 1; i++) {
-    arr[i] = arr[i + 1];
-  }
-
-  arr.pop(); // remove duplicated final element
-};
+console.log(removeElement([3, 2, 2, 3], 3));
