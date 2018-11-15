@@ -1,7 +1,7 @@
 
-const Node = (val) => {
-  return { val, next: null };
-};
+// const Node = (val) => {
+//   return { val, next: null };
+// };
 
 // f is the function to test
 // input is an array of tuples
@@ -75,6 +75,10 @@ module.exports = {
   },
 
   makeLinkedList: (values) => {
+    const Node = (val) => {
+      return { val, next: null };
+    };
+
     const list = Node(values[0]);
     let pointer = list;
 
