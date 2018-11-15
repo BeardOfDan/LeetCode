@@ -3,18 +3,16 @@
  * @return {number}
  */
 var removeDuplicates = function (nums) {
-  // starting from end for efficiency
-  for (let i = nums.length - 1; i > 0; i--) {
-    if (nums[i] === nums[i - 1]) {
-      removeItem(nums, i);
+  let current = 0;
+
+  for (let lead = 1; lead < nums.length; lead++) {
+    if (nums[current] !== nums[lead]) {
+      current++;
+      nums[current] = nums[lead];
     }
   }
+
+  return current + 1; // lead starts ahead of current by one
 };
 
-const removeItem = (arr, index) => {
-  for (let i = index; i < arr.length - 1; i++) {
-    arr[i] = arr[i + 1];
-  }
-
-  arr.pop(); // remove duplicate last element
-};
+console.log(removeDuplicates([1, 1, 2]));
