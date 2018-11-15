@@ -11,60 +11,45 @@
  * @return {ListNode}
  */
 
-
 var reverseKGroup = function (head, k) {
-  // const { listToArr } = require('./_test');
   const preStart = { next: head };
 
+  let lead = preStart;
+  let current = preStart;
   let trail = preStart;
-  let lead = trail;
 
-  const listToStr = (head) => {
-    const result = [];
-    let pointer = head;
-
-    while (pointer !== null) {
-      result.push(pointer.val);
-      pointer = pointer.next;
-    }
-
-    return result.join(', ');
-  };
-
-  while (true) {
-    let remainder = trail;
-    const pointers = [];
+  const shouldContinue = function () {
     for (let i = 0; i < k; i++) {
-      remainder = remainder.next; // update remainder
-      pointers.push(remainder); // put pointers to the nodes to reverse in an array
       if (lead.next === null) {
-        return preStart.next; // finished
+        return false;
       }
       lead = lead.next;
     }
+    return true;
+  };
 
-    const length = pointers.length;
-
-    const last = pointers[pointers.length - 1];
-    const first = pointers[0];
-
-    trail.next = last;
-    first.next = remainder;
-
-    console.log('pre');
-
-    for (let i = length - 1; i > 0; i--) {
-      pointers[i].next = pointers[i - 1];
-      console.log('i: ' + i);
-    }
-
-    console.log('post');
-
+  while (shouldContinue()) {
+    const pointers = [];
     for (let i = 0; i < k; i++) {
-      trail = trail.next;
+      pointers.unshift(current.next);
+      current = current.next;
     }
 
-    console.log('end of while loop');
+    trail.next = pointers[0]; // Previous content links to current
+
+    const remainder = lead.next;
+    const lastIndex = pointers.length - 1;
+    pointers[lastIndex].next = remainder; // current content links to following content
+
+    lead = pointers[lastIndex]; // update lead
+    current = lead; // update current
+
+    for (let i = 0; i < (k - 1); i++) {
+      pointers[i].next = pointers[i + 1]; // reverses order of current content
+      trail = trail.next; // update trail
+    }
+
+    trail = trail.next; // update trail | previous loop was one iteration short
   }
 
   return preStart.next;
@@ -76,6 +61,10 @@ const { makeLinkedList } = TEST;
 const testOne = makeLinkedList([1, 2, 3, 4, 5]);
 const expectOne = makeLinkedList([2, 1, 4, 3, 5]);
 
+const testTwo = makeLinkedList([1, 2, 3, 4, 5]);
+const expectTwo = makeLinkedList([3, 2, 1, 4, 5]);
+
 TEST.runTests(reverseKGroup, [
-  [[testOne, 2], expectOne]
+  [[testOne, 2], expectOne],
+  [[testTwo, 3], expectTwo]
 ]);
