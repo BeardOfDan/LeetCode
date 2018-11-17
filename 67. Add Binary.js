@@ -31,20 +31,15 @@ var addBinary = function (a, b) {
       result = '0' + result;
     }
 
-    indexA--;
+    indexA--; // move to the next digit
     indexB--;
   }
 
-  if (carry) {
+  if (carry) { // the final iteration had a carry
     result = '1' + result;
   }
 
   return result;
-
-  // const alpha = parseInt(a, 2);
-  // const beta = parseInt(b, 2);
-  // const sum = alpha + beta;
-  // return sum.toString(2);
 };
 
 require('./_test').runTests(addBinary, [
