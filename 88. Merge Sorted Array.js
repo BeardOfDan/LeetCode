@@ -13,7 +13,7 @@ var merge = function (nums1, m, nums2, n) {
     nums1[i] = nums2[i - m];
   }
 
-  nums1 = nums1.sort((a, b) => { return a - b; }); // mutate nums1
+  nums1 = nums1.sort((a, b) => { return a - b; });
 
-  // nums1 is the answer, no need to return anything
+  // nums1 is the answer (by reference), no need to return anything
 };
