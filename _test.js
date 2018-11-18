@@ -100,5 +100,9 @@ module.exports = {
     }
 
     return result;
+  },
+
+  listToStr: (head) => {
+    return listToArr.toString(', ');
   }
 };
