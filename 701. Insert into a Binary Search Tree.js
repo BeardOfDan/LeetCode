@@ -10,6 +10,7 @@
  * @param {number} val
  * @return {TreeNode}
  */
+// NOTE: val is guarenteed to not already be in the tree
 var insertIntoBST = function (root, val) {
   if (root.val < val) {
     if (root.right === null) {
