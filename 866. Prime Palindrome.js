@@ -100,40 +100,46 @@
  */
 var primePalindrome = function (N) {
   for (let L = 1; L <= 5; ++L) {
-    //Check for odd-length palindromes
-    for (let root = Math.pow(10, L - 1); root < Math.pow(10, L); ++root) {
-      let sb = root.toString();
-      for (k = L - 2; k >= 0; --k)
-        sb += sb[k];
-      x = parseInt(sb.toString());
-      if (x >= N && isPrime(x))
-        return x;
-      //If we didn't check for even-length palindromes:
-      //return N <= 11 ? min(x, 11) : x
+    // Check for odd-length palindromes
+    for (let root = Math.pow(10, L - 1); root < Math.pow(10, L); root++) {
+      let str = root.toString();
+      for (k = L - 2; k >= 0; k--) {
+        str += str[k];
+      }
+
+      const palindrome = parseInt(str);
+      if (palindrome >= N && isPrime(palindrome)) {
+        return palindrome;
+      }
     }
 
-    //Check for even-length palindromes
-    for (let root = Math.pow(10, L - 1); root < Math.pow(10, L); ++root) {
-      sb = root.toString();
-      for (k = L - 1; k >= 0; --k)
-        sb += sb[k];
-      x = parseInt(sb);
-      if (x >= N && isPrime(x))
-        return x;
+    // Check for even-length palindromes
+    for (let root = Math.pow(10, L - 1); root < Math.pow(10, L); root++) {
+      let str = root.toString();
+      for (k = L - 1; k >= 0; k--) {
+        str += str[k];
+      }
+
+      const palindrome = parseInt(str);
+      if (palindrome >= N && isPrime(palindrome)) {
+        return palindrome;
+      }
     }
   }
-
-  return null; // error case
 };
 
 const isPrime = (N) => {
   if (N < 2) {
     return false;
+  } else if (N === 2) {
+    return true;
+  } else if ((N % 2) === 0) {
+    return false;
   }
 
   const limit = Math.sqrt(N);
-  for (let i = 2; i <= limit; ++i) {
-    if (N % i == 0) {
+  for (let i = 3; i <= limit; i += 2) {
+    if (N % i === 0) {
       return false;
     }
   }
