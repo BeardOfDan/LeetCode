@@ -25,7 +25,7 @@ var nearestPalindromic = function (n) {
   }
 
   if ((i === 0) && (s[i] === '1')) {
-    s = spliceStr(s, 0, '1');
+    s = spliceStr(s, 0, 1); // delete first char
     const mid = ~~((s.length - 1) / 2);
     s = spliceStr(s, mid, 1, '9');
   } else {
@@ -71,6 +71,7 @@ const spliceStr = (str, start, len, replace = '') => {
   str = str.split('');
   str.splice(start, len, replace);
   str = str.join('');
+
   return str;
 };
 
@@ -79,6 +80,8 @@ require('./_test').runTestsSingleArg(nearestPalindromic, [
   ['1', '0'],
   ['2', '1'],
   ['12', '11'],
+  ['99', '101'],
   ['100', '99'],
+  ['1000', '999'],
   ['807045053224792883', '807045053350540708']
 ]);
